@@ -4,13 +4,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 def about(req):
-    return render(req, 'students/about.html')
+    return render(req, 'catalog/home.html')
 
 
 def contact(req):
-    if req.method == 'POST':
-        name = req.POST.get('name')
-        message = req.POST.get('message')
-
-        return HttpResponse(f'Thank you, {name} message finish')
-    return render(req, 'students/contact.html')
+    return render(req, 'catalog/contacts.html')
