@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def about(req):
+def home(req):
     return render(req, 'catalog/home.html')
 
 
