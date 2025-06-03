@@ -11,7 +11,7 @@ class Product(models.Model):
         help_text="Введите наименование товара",
     )
     description = models.TextField(
-        verbose_name="Описание", help_text="Введите описание товара"
+        max_length=100, verbose_name="Описание", help_text="Введите описание товара"
     )
     photo = models.ImageField(
         upload_to="config/photo",
@@ -21,7 +21,7 @@ class Product(models.Model):
         help_text="Загрузите фото",
     )
     category = models.ForeignKey(
-        'Category',
+        "Category",
         on_delete=models.SET_NULL,
         related_name="catalog",
         null=True,
@@ -47,7 +47,7 @@ class Category(models.Model):
         help_text="Введите наименование категории",
     )
     description = models.TextField(
-        verbose_name="Описание", help_text="Введите описание категории"
+        max_length=100, verbose_name="Описание", help_text="Введите описание категории"
     )
 
     class Meta:
