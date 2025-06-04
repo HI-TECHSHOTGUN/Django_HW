@@ -11,7 +11,7 @@ class Product(models.Model):
         help_text="Введите наименование товара",
     )
     description = models.TextField(
-        max_length=100, verbose_name="Описание", help_text="Введите описание товара"
+        verbose_name="Описание", help_text="Введите описание товара"
     )
     photo = models.ImageField(
         upload_to="config/photo",
@@ -28,8 +28,8 @@ class Product(models.Model):
         blank=True,
     )
     price = models.IntegerField(help_text="Введите стоимость товара")
-    created_at = models.DateField()
-    updated_at = models.DateField()
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
 
     class Meta:
         verbose_name = "Продукт"
@@ -47,7 +47,7 @@ class Category(models.Model):
         help_text="Введите наименование категории",
     )
     description = models.TextField(
-        max_length=100, verbose_name="Описание", help_text="Введите описание категории"
+        verbose_name="Описание", help_text="Введите описание категории"
     )
 
     class Meta:
