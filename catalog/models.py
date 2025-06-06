@@ -21,15 +21,15 @@ class Product(models.Model):
         help_text="Загрузите фото",
     )
     category = models.ForeignKey(
-        'Category',
+        "Category",
         on_delete=models.SET_NULL,
         related_name="catalog",
         null=True,
         blank=True,
     )
     price = models.IntegerField(help_text="Введите стоимость товара")
-    created_at = models.DateField()
-    updated_at = models.DateField()
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
 
     class Meta:
         verbose_name = "Продукт"
