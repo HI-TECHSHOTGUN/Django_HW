@@ -2,6 +2,19 @@
 {% load my_tags %}
 {% block content %}
 
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Магазин продуктов</h1>
+      <p class="lead text-body-secondary">Мне понравился больше этот шаблон, поэтому я честно его своровал у дяденьки который его делал, извините</p>
+      <p>
+        <a href="{% url 'catalog:new_product' %}" class="btn btn-primary my-2">Создать продукт</a>
+        <a href="#" class="btn btn-secondary my-2">Кнопка, серая</a>
+      </p>
+    </div>
+  </div>
+</section>
+
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -15,7 +28,7 @@
                 <div class="btn-group">
                   <a href="{% url 'catalog:details' product.pk %}" class="btn btn-outline-success">Подробнее</a>
                 </div>
-                <small class="text-body-secondary">0 sec</small>
+                <small class="text-body-secondary">{{ product.updated_at }}</small>
               </div>
             </div>
           </div>
