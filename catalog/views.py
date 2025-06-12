@@ -42,5 +42,5 @@ class ProductDeleteView(DeleteView):
 
 class ContactView(TemplateView):
     model = Product
-    template_name = 'catalog/contacts'
+    template_name = 'catalog/contacts.html'
 
