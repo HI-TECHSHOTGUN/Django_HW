@@ -1,23 +1,46 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from catalog.models import Product
 
 
 # Create your views here.
 
-def home(req):
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(req, 'catalog/home.html', context=context)
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'products'
 
 
-def contacts(req):
-    return render(req, 'catalog/contacts.html')
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/details.html'
+    context_object_name = 'product_detail'
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'description', 'photo', 'category', 'price']
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:home')
 
 
-def details(req, detail_id):
-    product = get_object_or_404(Product, id=detail_id)
-    context = {'product': product}
-    return render(req, 'catalog/details.html', context=context)
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ['name', 'description', 'photo', 'category', 'price']
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:home')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog/product_delete.html'
+    success_url = reverse_lazy('catalog:home')
+
+
+class ContactView(TemplateView):
+    model = Product
+    template_name = 'catalog/contacts.html'
 
