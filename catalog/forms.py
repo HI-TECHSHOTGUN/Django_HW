@@ -57,8 +57,5 @@ class ProductForm(ModelForm):
         if price <= 0:
             raise ValidationError('Цена не может быть отрицательной или равна нулю')
 
-        if isinstance(price, int):
-            raise ValidationError(f'Цена не может быть не число{type(price)}')
-
         cleaned_data['price'] = price
-        return cleaned_data
+        return price
