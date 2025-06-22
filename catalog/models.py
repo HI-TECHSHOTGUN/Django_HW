@@ -24,10 +24,11 @@ class Product(models.Model):
         "Category",
         on_delete=models.SET_NULL,
         related_name="catalog",
+        verbose_name="Категория",
         null=True,
         blank=True,
     )
-    price = models.IntegerField(help_text="Введите стоимость товара")
+    price = models.IntegerField(verbose_name="Цена", help_text="Введите стоимость товара")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
 
