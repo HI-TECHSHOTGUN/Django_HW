@@ -1,5 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
@@ -46,3 +49,15 @@ class ContactView(LoginRequiredMixin, TemplateView):
     model = Product
     template_name = 'catalog/contacts.html'
 
+
+class UnpublishProduct(LoginRequiredMixin, View):
+    def post(self, req, pk):
+        product = get_object_or_404(Product, id=pk)
+
+        if not req.user.has_perm('catalog.can_unpublish_product'):
+            return HttpResponseForbidden('У вас нет нужных прав, для продолжения нужно иметь права уровня МОДЕРАТОР')
+
+        product.is_published = True
+        product.save()
+
+        return redirect('catalog:details', pk=pk)
