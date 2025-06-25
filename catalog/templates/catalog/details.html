@@ -35,6 +35,12 @@
                 <small class="text-body-secondary">0 sec</small>
               </div>
             </div>
+            {% if 'catalog.can_unpublish_book' in perms %}
+              <form action="{% url 'catalog:unpublish' product_detail.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit">Опубликовать</button>
+              </form>
+            {% endif %}
           </div>
         </div>
       </div>
