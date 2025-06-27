@@ -24,12 +24,6 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "catalog/details.html"
     context_object_name = "product_detail"
 
-    # def get_object(self):
-    #     obj = super().get_object()
-    #     if obj.owner != self.request.user:
-    #         return HttpResponseForbidden("У вас нет прав на просмотр этого продукта.")
-    #     return obj
-
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product

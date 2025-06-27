@@ -33,11 +33,14 @@
                         <a href="{% url 'catalog:update_product' product_detail.pk %}" class="btn btn-outline-info">Редактировать</a>
                         <a href="{% url 'catalog:delete_product' product_detail.pk %}" class="btn btn-outline-danger">Удалить</a>
                     {% endif %}
+                    {% if request.user.is_superuser or perms.user.delete_any_product and product_detail.owner != request.user %}
+                        <a href="{% url 'catalog:delete_product' product_detail.pk %}" class="btn btn-outline-danger">Удалить</a>
+                    {% endif %}
                 </div>
                 <small class="text-body-secondary">0 sec</small>
               </div>
             </div>
-            {% if request.user.is_superuser or product_detail.owner == request.user %}
+            {% if request.user.is_superuser or perms.user.can_unpublish_product %}
               <form action="{% url 'catalog:unpublish' product_detail.id %}" method="post">
                   {% csrf_token %}
                   <a href="{% url 'catalog:home' %}" class="btn btn-outline-secondary">Опубликовать</a>
