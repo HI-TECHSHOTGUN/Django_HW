@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 
 # Create your models here.
@@ -32,6 +33,7 @@ class Product(models.Model):
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
     is_published = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Продукт"

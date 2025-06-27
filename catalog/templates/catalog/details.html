@@ -29,13 +29,15 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a href="{% url 'catalog:home' %}" class="btn btn-outline-success">Назад</a>
-                  <a href="{% url 'catalog:update_product' product_detail.pk %}" class="btn btn-outline-info">Редактировать</a>
-                  <a href="{% url 'catalog:delete_product' product_detail.pk %}" class="btn btn-outline-danger">Удалить</a>
+                  {% if request.user.is_superuser or product_detail.owner == request.user %}
+                    <a href="{% url 'catalog:update_product' product_detail.pk %}" class="btn btn-outline-info">Редактировать</a>
+                    <a href="{% url 'catalog:delete_product' product_detail.pk %}" class="btn btn-outline-danger">Удалить</a>
+                  {% endif %}
                 </div>
                 <small class="text-body-secondary">0 sec</small>
               </div>
             </div>
-            {% if 'catalog.can_unpublish_book' in perms %}
+            {% if request.user.is_superuser or product_detail.owner == request.user %}
               <form action="{% url 'catalog:unpublish' product_detail.id %}" method="post">
                   {% csrf_token %}
                   <button type="submit">Опубликовать</button>
