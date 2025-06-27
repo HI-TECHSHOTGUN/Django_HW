@@ -24,11 +24,11 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     template_name = "catalog/details.html"
     context_object_name = "product_detail"
 
-    def get_object(self):
-        obj = super().get_object()
-        if obj.owner != self.request.user:
-            return HttpResponseForbidden("У вас нет прав на просмотр этого продукта.")
-        return obj
+    # def get_object(self):
+    #     obj = super().get_object()
+    #     if obj.owner != self.request.user:
+    #         return HttpResponseForbidden("У вас нет прав на просмотр этого продукта.")
+    #     return obj
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -36,6 +36,10 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductForm
     template_name = "catalog/product_form.html"
     success_url = reverse_lazy("catalog:home")
+
+    def form_valid(self, form):
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
@@ -48,6 +52,16 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        if not pk:
+            raise Http404("Product does not exist")
+        product = Product.objects.get(pk=pk)
+        if product.owner != self.request.user and not self.request.user.has_perm(
+                "catalog.can_unpublish_product"):
+            return HttpResponseForbidden("У вас нет прав на редактирование этого продукта.")
+        return product
+
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
@@ -59,7 +73,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
         if not pk:
             raise Http404("Product does not exist")
         product = Product.objects.get(pk=pk)
-        if product.owner != self.request.user:
+        if product.owner != self.request.user and not self.request.user.has_perm("catalog.delete_any_product"):
             return HttpResponseForbidden("У вас нет прав на удаление этого продукта.")
         return product
 
