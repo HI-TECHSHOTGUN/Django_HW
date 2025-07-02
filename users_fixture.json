@@ -1,0 +1,91 @@
+[
+{
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$LtDE0X6qMSMPbewKaFCffH$uN8xpI1YFpIgD77Bh5tIvDs6O8nx8ilKv33/kHC7DkE=",
+        "last_login": "2025-06-28T18:09:55.315Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-06-24T03:33:30Z",
+        "email": "django_test2@list.ru",
+        "phone_number": null,
+        "country": "Россия",
+        "avatar": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$1qMVUyHdsyS7OjOKEEGJh4$hXejtsbSfvs3+qP2J4FYW1BKrjyuxjqQldj8eyZsE0w=",
+        "last_login": "2025-06-28T18:11:44.357Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-06-24T11:51:39.394Z",
+        "email": "maksimov_maksime@mail.ru",
+        "phone_number": null,
+        "country": "",
+        "avatar": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$CTORBJ0512bmHCzrrl5XMh$JS6cWAaxDwfZjH/oAyElB8sVQgkNbpKl4fY87stXPVI=",
+        "last_login": "2025-06-28T10:03:11.785Z",
+        "is_superuser": true,
+        "first_name": "Admin",
+        "last_name": "Admin",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-06-24T12:12:49Z",
+        "email": "admin@sky.pro",
+        "phone_number": null,
+        "country": "Россия",
+        "avatar": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$1000000$VO6jpmUmx80j5o16o8FKn5$JT3/EgqV75nt69YXb0++s9X9R2YSvzKxi4wQF8zjqMU=",
+        "last_login": "2025-06-28T10:04:03.520Z",
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-06-28T09:59:45Z",
+        "email": "waran_125@mail.ru",
+        "phone_number": null,
+        "country": "Россия",
+        "avatar": "",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            25,
+            37,
+            38,
+            28
+        ]
+    }
+}
+]
