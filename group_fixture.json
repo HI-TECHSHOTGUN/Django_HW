@@ -1,0 +1,17 @@
+[
+{
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+        "name": "МОДЕРАТОР",
+        "permissions": [
+        {"codename": "add_product", "name": "Can add Продукт"},
+        {"codename": "can_unpublish_product", "name": "Can unpublish product"},
+        {"codename": "change_product", "name": "Can change Продукт"},
+        {"codename": "delete_any_product", "name": "Can delete any product"},
+        {"codename": "delete_product", "name": "Can delete Продукт"},
+        {"codename": "view_product", "name": "Can view Продукт"}
+      ]
+    }
+}
+]
