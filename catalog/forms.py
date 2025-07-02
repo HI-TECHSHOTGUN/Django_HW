@@ -6,40 +6,48 @@ from catalog.models import Product
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'photo', 'category', 'price',]
+        fields = [
+            "name",
+            "description",
+            "photo",
+            "category",
+            "price",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
-        self.fields['name'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Введите название'
-        })
-        self.fields['description'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Введите описание'
-        })
-        self.fields['photo'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Добавьте фотографию'
-        })
-        self.fields['category'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Укажите категорию'
-        })
-        self.fields['price'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Укажите цену'
-        })
+        self.fields["name"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Введите название"}
+        )
+        self.fields["description"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Введите описание"}
+        )
+        self.fields["photo"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Добавьте фотографию"}
+        )
+        self.fields["category"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Укажите категорию"}
+        )
+        self.fields["price"].widget.attrs.update(
+            {"class": "form-control", "placeholder": "Укажите цену"}
+        )
 
     bad_words = [
-        "казино", "криптовалюта", "крипта", "биржа", "дешево", "бесплатно",
-        "обман", "полиция", "радар"
+        "казино",
+        "криптовалюта",
+        "крипта",
+        "биржа",
+        "дешево",
+        "бесплатно",
+        "обман",
+        "полиция",
+        "радар",
     ]
 
     def clean(self):
         cleaned_data = super().clean()
-        name = cleaned_data.get('name')
-        description = cleaned_data.get('description')
+        name = cleaned_data.get("name")
+        description = cleaned_data.get("description")
 
         for word in self.bad_words:
             word_lower = word.lower()
@@ -52,10 +60,10 @@ class ProductForm(ModelForm):
 
     def clean_price(self):
         cleaned_data = super().clean()
-        price = cleaned_data.get('price')
+        price = cleaned_data.get("price")
 
         if price <= 0:
-            raise ValidationError('Цена не может быть отрицательной или равна нулю')
+            raise ValidationError("Цена не может быть отрицательной или равна нулю")
 
-        cleaned_data['price'] = price
+        cleaned_data["price"] = price
         return price
