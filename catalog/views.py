@@ -2,15 +2,38 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden, Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views import View
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.cache import cache
 
 from catalog.forms import ProductForm
-from catalog.models import Product
+from catalog.models import Product, Category
+from catalog.services import ProductService
 
 
 # Create your views here.
+class ProductListByCategoryView(ListView):
+    model = Product
+    template_name = 'catalog/products_by_category.html'
+    context_object_name = 'products_category'
+
+    def get_queryset(self):
+        category_name = self.kwargs.get('category_name')
+        cache_key = f'products_{category_name}'
+        queryset = cache.get(cache_key)
+        if not queryset:
+            queryset = ProductService.get_products_by_category(category_name)
+            cache.set(cache_key, list(queryset), 60 * 3)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category_name'] = self.kwargs.get('category_name')
+        context['categories'] = Category.objects.all()
+        return context
 
 
 class ProductListView(ListView):
@@ -18,11 +41,20 @@ class ProductListView(ListView):
     template_name = "catalog/home.html"
     context_object_name = "products"
 
+    def get_queryset(self):
+        queryset = cache.get('products_queryset')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('products_queryset', queryset, 60 * 3)
+        return queryset
 
+
+@method_decorator(cache_page(60 * 3), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/details.html"
     context_object_name = "product_detail"
+
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
