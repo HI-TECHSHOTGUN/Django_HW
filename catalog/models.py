@@ -32,7 +32,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name="Цена", help_text="Введите стоимость товара")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now=True)
-    is_published = models.BooleanField(default=False)
+    is_published = models.BooleanField(default=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:

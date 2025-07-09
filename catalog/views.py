@@ -48,6 +48,11 @@ class ProductListView(ListView):
             cache.set('products_queryset', queryset, 60 * 3)
         return queryset
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        return context
+
 
 @method_decorator(cache_page(60 * 3), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -118,7 +123,7 @@ class UnpublishProduct(LoginRequiredMixin, View):
                 "У вас нет нужных прав, для продолжения нужно иметь права уровня МОДЕРАТОР"
             )
 
-        product.is_published = True
+        product.is_published = False
         product.save()
 
         return redirect("catalog:details", pk=pk)
