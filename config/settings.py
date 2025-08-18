@@ -162,3 +162,9 @@ CACHES = {
             'LOCATION': 'redis://redis:6379/1',
         }
 }
+
+CSRF_TRUSTED_ORIGINS_STR  = [os.getenv('CSRF_TRUSTED_ORIGINS')]
+if CSRF_TRUSTED_ORIGINS_STR:
+    CSRF_TRUSTED_ORIGINS = CSRF_TRUSTED_ORIGINS_STR.split(',')
+else:
+    CSRF_TRUSTED_ORIGINS = []
