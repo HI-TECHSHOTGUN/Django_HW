@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 
-from django.conf.global_settings import LOGIN_REDIRECT_URL
+from django.conf.global_settings import LOGIN_REDIRECT_URL, STATIC_ROOT
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True if os.getenv('DEBUG') == 'True' else False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -130,6 +130,8 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -157,6 +159,6 @@ CACHES = {
     'default':
         {
             'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': 'redis://localhost:6379/1',
+            'LOCATION': 'redis://redis:6379/1',
         }
 }
