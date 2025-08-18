@@ -1,0 +1,65 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Овощи",
+        "description": "Просто овощи"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Фрукты",
+        "description": "Фрукты тропически, а иакже местного произростания"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Ягоды",
+        "description": "Ягоды местного произростания"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Еживика",
+        "description": "Почти как малина но черная",
+        "photo": "",
+        "category": 3,
+        "price": 100,
+        "created_at": "2025-05-29",
+        "updated_at": "2025-05-29"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Банан",
+        "description": "Длинный желтый и вообще с точки зрения ботаники это трава",
+        "photo": "",
+        "category": 2,
+        "price": 159,
+        "created_at": "2025-05-29",
+        "updated_at": "2025-05-29"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Апельсин",
+        "description": "Круглый, ораньжевый иногда вызывает аллергическую реакцию",
+        "photo": "",
+        "category": 2,
+        "price": 139,
+        "created_at": "2025-05-29",
+        "updated_at": "2025-05-29"
+    }
+}
+]

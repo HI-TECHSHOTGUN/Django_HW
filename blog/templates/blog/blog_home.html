@@ -1,0 +1,42 @@
+{% extends "catalog/base.html" %}
+{% load blog_my_tags %}
+{% block content %}
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Блог магазина</h1>
+      <p class="lead text-body-secondary">Не изменял шаблон, но думаю и так норм</p>
+      <p>
+        <a href="{% url 'blog:new_post' %}" class="btn btn-primary my-2">Создать пост</a>
+        <a href="#" class="btn btn-secondary my-2">Кнопка, серая</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for post in posts %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="{{ post.photo | media_filter }}">
+            <div class="card-body">
+              <h3 class="card-text">{{ post.name | truncatechars:100}}</h3>
+              <p class="card-text">Содержание поста: {{ post.description  | truncatechars:25}}</p>
+              <p></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'blog:blog_details' post.pk %}" class="btn btn-outline-success">Еще</a>
+                </div>
+                <small class="text-body-secondary">просмотры: {{ post.views }}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock %}

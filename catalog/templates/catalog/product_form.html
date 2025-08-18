@@ -1,0 +1,25 @@
+{% extends "catalog/base.html" %}
+{% load my_tags %}
+{% block content %}
+
+<section class="py-5 text-center container">
+  <div class="row py-lg-5">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <h1 class="fw-light">Создайте новый продукт</h1>
+      <p class="lead text-body-secondary">Я не знаю чем дополнить заполните форму пожалуйста</p>
+      <p>
+        <a href="#" class="btn btn-primary my-2">Кнопка, синяя</a>
+        <a href="#" class="btn btn-secondary my-2">Кнопка, серая</a>
+      </p>
+    </div>
+  </div>
+</section>
+<div class="container" style="max-width: 600px;">
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-outline-success">Сохранить</button>
+        <a href="{% url 'catalog:home' %}" class="btn btn-outline-warning">Отмена</a>
+    </form>
+</div>
+{% endblock %}
